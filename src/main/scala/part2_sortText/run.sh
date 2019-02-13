@@ -1,5 +1,25 @@
 #!/bin/bash
 
+function install_dependencies {
+    sbt_status=`which sbt`
+    if [ $? -ne 0 ]
+    then
+      echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+      sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+      sudo apt-get -y -q update
+      sudo apt-get install -y -q sbt
+    else
+      echo "sbt is already installed..."
+    fi
+    scala_status=`which scala`
+    if [ $? -ne 0 ]
+    then
+      sudo apt-get install -y -q scala
+    else
+      echo "scala is already installed..."
+    fi
+}
+
 SCRIPT=`basename ${BASH_SOURCE[0]}`
 SPARK_DIR=""
 HDFS_INPUT=""
@@ -69,11 +89,20 @@ done
 shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 
 ### End getopts code ###
+install_dependencies
 
 SPARK_SUBMIT="${SPARK_DIR}/bin/spark-submit"
 PROJECT_ROOT_DIR=$(dirname $(dirname $(dirname $(dirname $(cd `dirname $0` && pwd)))))
 JAR_FILE="${PROJECT_ROOT_DIR}/target/scala-2.11/pagerank_2.11-1.0.jar"
 CLASSPATH="part2_sortText.sortText"
+pushd $PROJECT_ROOT_DIR
+if [ ! -f "${JAR_FILE}" ]
+then
+    sbt package
+else
+    echo "No packaging required..."
+fi
+popd
 ${SPARK_SUBMIT} --class ${CLASSPATH} \
   --executor-memory 8g --driver-memory 8g --executor-cores 5 \
   --master ${MASTER_REST_URL} --deploy-mode cluster \

@@ -109,6 +109,8 @@ pushd $PROJECT_ROOT_DIR
 if [ ! -f "${JAR_FILE}" ]
 then
     sbt package
+else
+    echo "No packaging required..."
 fi
 popd
 
