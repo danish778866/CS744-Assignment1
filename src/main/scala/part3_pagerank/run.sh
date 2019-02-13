@@ -1,7 +1,6 @@
 #!/bin/bash
 
 SCRIPT=`basename ${BASH_SOURCE[0]}`
-HADOOP_DIR=""
 SPARK_DIR=""
 TASK=1
 HDFS_INPUT=""
@@ -17,14 +16,13 @@ function HELP {
   echo -e \\n"Help documentation for ${BOLD}${SCRIPT}.${NORM}"\\n
   echo -e "${REV}Basic usage:${NORM} ${BOLD}$SCRIPT -d <hadoop path> -s <spark path> -t <task number>${NORM}"\\n
   echo "Command line switches are optional. The following switches are recognized."
-  echo "${REV}-d${NORM}  --Sets the Hadoop installation directory ${BOLD}d${NORM}. This should be an absolute path"
   echo "${REV}-s${NORM}  --Sets the Spark installation directory ${BOLD}s${NORM}. This should be an absolute path"
   echo "${REV}-t${NORM}  --Sets the task to be run ${BOLD}t${NORM}. This can be any of the values 1,2,3,4"
   echo "${REV}-i${NORM}  --Sets the HDFS input file ${BOLD}i${NORM}. This should be in the form hdfs://<MASTER-URL>:<PORT>/<PATH>"
   echo "${REV}-o${NORM}  --Sets the HDFS output file ${BOLD}o${NORM}. This should be in the form hdfs://<MASTER-URL>:<PORT>/<PATH>"
   echo "${REV}-m${NORM}  --Sets the Spark master REST URL ${BOLD}m${NORM}. This should be in the form spark://<MASTER-URL>:<PORT>"
   echo -e "${REV}-h${NORM}  --Displays this help message. No further functions are performed."\\n
-  echo -e "Example: ${BOLD}$SCRIPT -d /home/foo/hadoop -s /home/foo/spark -t 1${NORM}"\\n
+  echo -e "Example: ${BOLD}$SCRIPT -s \"/home/foo/spark\" -t 1 -i \"hdfs://10.10.1.1:9000/input.txt\" -o \"hdfs://10.10.1.1:9000/output.txt\" -m \"c220g2-010826vm-1.wisc.cloudlab.us:6066\"${NORM}"\\n
   exit 1
 }
 
@@ -42,31 +40,27 @@ fi
 #Notice there is no ":" after "h". The leading ":" suppresses error messages from
 #getopts. This is required to get my unrecognized option code to work.
 
-while getopts :d:s:t:i:o:m:h FLAG; do
+while getopts :s:t:i:o:m:h FLAG; do
   case $FLAG in
-    d)  #set option "i"
-      HADOOP_DIR=$OPTARG
+    s)
+      SPARK_DIR=$OPTARG
+      echo "-s used: $OPTARG"
+      ;;
+    t)
+      TASK=$OPTARG
+      echo "-t used: $OPTARG"
+      ;;
+    i)
+      HDFS_INPUT=$OPTARG
       echo "-i used: $OPTARG"
       ;;
-    s)  #set option "j"
-      SPARK_DIR=$OPTARG
-      echo "-j used: $OPTARG"
-      ;;
-    t)  #set option "c"
-      TASK=$OPTARG
-      echo "-c used: $OPTARG"
-      ;;
-    i)  #set option "c"
-      HDFS_INPUT=$OPTARG
-      echo "-c used: $OPTARG"
-      ;;
-    o)  #set option "c"
+    o)
       HDFS_OUTPUT=$OPTARG
-      echo "-c used: $OPTARG"
+      echo "-o used: $OPTARG"
       ;;
-    m)  #set option "c"
+    m)
       MASTER_REST_URL=$OPTARG
-      echo "-c used: $OPTARG"
+      echo "-m used: $OPTARG"
       ;;
     h)  #show help
       HELP
@@ -82,7 +76,7 @@ shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 
 ### End getopts code ###
 
-SPARK_SUBMIT="${SPARK_DIR}/sbin/spark-submit"
+SPARK_SUBMIT="${SPARK_DIR}/bin/spark-submit"
 PROJECT_ROOT_DIR=$(dirname $(dirname $(dirname $(dirname $(cd `dirname $0` && pwd)))))
 JAR_FILE="${PROJECT_ROOT_DIR}/target/scala-2.11/pagerank_2.11-1.0.jar"
 CLASSPATHS=("Dummy" "part3_pagerank.task1_pagerank_algo.PageRank" \
