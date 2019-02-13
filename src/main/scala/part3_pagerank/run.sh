@@ -1,5 +1,25 @@
 #!/bin/bash
 
+function install_dependencies {
+    sbt_status=`which sbt`
+    if [ $sbt_status -ne 0 ]
+    then
+      echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+      sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
+      sudo apt-get -y -q update
+      sudo apt-get install -y -q sbt
+    else
+      echo "sbt is already installed..."
+    fi
+    scala_status=`which scala`
+    if [ $scala_status -ne 0 ]
+    then
+      sudo apt-get install -y -q scala
+    else
+      echo "scala is already installed..."
+    fi
+}
+
 SCRIPT=`basename ${BASH_SOURCE[0]}`
 SPARK_DIR=""
 TASK=1
@@ -83,6 +103,14 @@ CLASSPATHS=("Dummy" "part3_pagerank.task1_pagerank_algo.PageRank" \
   "part3_pagerank.task2_custom_rdd_partitioning.PageRankCustomPartition" \
   "part3_pagerank.task3_caching.PageRankCache" \
   "part3_pagerank.task4_kill_worker.PageRankKillWorker")
+
+pushd $PROJECT_ROOT_DIR
+if [ ! -f "${JAR_FILE}" ]
+then
+    sbt package
+fi
+popd
+
 if [ $TASK -ge 1 -a $TASK -le 4 ]
 then
     ${SPARK_SUBMIT} --class ${CLASSPATHS[$TASK]} \
