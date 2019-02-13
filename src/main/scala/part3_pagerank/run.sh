@@ -106,11 +106,11 @@ CLASSPATHS=("Dummy" "part3_pagerank.task1_pagerank_algo.PageRank" \
   "part3_pagerank.task4_kill_worker.PageRankKillWorker")
 
 pushd $PROJECT_ROOT_DIR
-JAR_FILE="find $(pwd)/ -name *.jar"
+JAR_FILE=`find $(pwd)/ -name *.jar`
 if [ -z "${JAR_FILE}" ]
 then
     sbt package
-    JAR_FILE="find $(pwd)/ -name *.jar"
+    JAR_FILE=`find $(pwd)/ -name *.jar`
 else
     echo "No packaging required..."
 fi
