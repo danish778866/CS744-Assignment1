@@ -6,13 +6,19 @@
 3. Shreeshrita Patnaik
 
 ## Building and Running
-```> git clone https://github.com/danish778866/CS744-Assignment1.git
-> cd CS744-Assignment1```
+```
+> git clone https://github.com/danish778866/CS744-Assignment1.git
+> cd CS744-Assignment1
+```
 
 ### Running SortText
+```
 > cd CS744-Assignment1
 > CS744-Assignment1/src/main/scala/part2\_sortText/run.sh -h # Get help text
+```
 
 ### Running PageRank
+```
 > cd CS744-Assignment1
 > CS744-Assignment1/src/main/scala/part3\_pagerank/run.sh -h # Get help text
+```
