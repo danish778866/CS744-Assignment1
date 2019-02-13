@@ -6,15 +6,18 @@ Mohan Rao Divate Kodandarama
 Mohammed Danish Shaikh
 Shreeshrita Patnaik
 */
+package part3_pagerank.task1_pagerank_algo
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import org.apache.spark.HashPartitioner
 
-object PageRankFinal {
+object PageRank {
   def main(args: Array[String]) {
     var conf = new SparkConf().setAppName("PageRank")
     var sc = new SparkContext(conf)
-    val initialFile = sc.textFile("hdfs://10.10.1.1:9000/enwiki-pages")
+    val input_file = args(0)
+    val output_file = args(1)
+    val initialFile = sc.textFile(input_file)
     var lowercaseFile = initialFile.map(x => x.toLowerCase)
     var filteredFile = lowercaseFile.filter(x => !(x contains ":") || (x contains "category:"))
     var filteredFile2 = filteredFile.filter{_.split("\t").size >= 2}
@@ -29,6 +32,6 @@ object PageRankFinal {
         }.reduceByKey{case(x,y) => x+y}
         ranks = contribs.map{case(x,y) => (x,0.15 + 0.85 * y)}
     }
-    ranks.coalesce(1).saveAsTextFile("hdfs://10.10.1.1:9000/g3_results/PageRank.txt")
+    ranks.coalesce(1).saveAsTextFile(output_file)
   }
 }
