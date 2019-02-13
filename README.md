@@ -14,13 +14,13 @@
 ### Running SortText
 ```
 > cd CS744-Assignment1
-> CS744-Assignment1/src/main/scala/part2\_sortText/run.sh -h # Get help text
+> CS744-Assignment1/src/main/scala/part2_sortText/run.sh -h # Get help text
 ```
 
 ### Running PageRank
 ```
 > cd CS744-Assignment1
-> CS744-Assignment1/src/main/scala/part3\_pagerank/run.sh -h # Get help text
+> CS744-Assignment1/src/main/scala/part3_pagerank/run.sh -h # Get help text
 ```
 
 ## Problem
