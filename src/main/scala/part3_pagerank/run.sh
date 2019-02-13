@@ -2,7 +2,7 @@
 
 function install_dependencies {
     sbt_status=`which sbt`
-    if [ $sbt_status -ne 0 ]
+    if [ $? -ne 0 ]
     then
       echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
       sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
@@ -12,7 +12,7 @@ function install_dependencies {
       echo "sbt is already installed..."
     fi
     scala_status=`which scala`
-    if [ $scala_status -ne 0 ]
+    if [ $? -ne 0 ]
     then
       sudo apt-get install -y -q scala
     else
