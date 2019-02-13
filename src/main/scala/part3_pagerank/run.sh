@@ -95,6 +95,7 @@ done
 shift $((OPTIND-1))  #This tells getopts to move on to the next argument.
 
 ### End getopts code ###
+install_dependencies
 
 SPARK_SUBMIT="${SPARK_DIR}/bin/spark-submit"
 PROJECT_ROOT_DIR=$(dirname $(dirname $(dirname $(dirname $(cd `dirname $0` && pwd)))))
