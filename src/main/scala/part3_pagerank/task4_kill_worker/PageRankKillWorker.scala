@@ -11,9 +11,9 @@ import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
 import org.apache.spark.HashPartitioner
 
-object PageRankKill {
+object PageRankKillWorker {
   def main(args: Array[String]) {
-    var conf = new SparkConf().setAppName("PageRankKill")
+    var conf = new SparkConf().setAppName("PageRankKillWorker")
     var sc = new SparkContext(conf)
     val input_file = args(0)
     val output_file = args(1)
