@@ -1,10 +1,18 @@
-CS744 Big Data Systems Assignment 1
+# CS744 Big Data Systems Assignment 1
 
-Group members:
-Mohan Rao Divate Kodandarama
-Mohammed Danish Shaikh
-Shreeshrita Patnaik
+## Group members:
+1. Mohan Rao Divate Kodandarama
+2. Mohammed Danish Shaikh
+3. Shreeshrita Patnaik
 
-Part 1: Software Deployment
-Part 2: A simple Spark application
-Part 3: PageRank
+## Building and Running
+> git clone https://github.com/danish778866/CS744-Assignment1.git
+> cd CS744-Assignment1
+
+### Running SortText
+> cd CS744-Assignment1
+> CS744-Assignment1/src/main/scala/part2\_sortText/run.sh -h # Get help text
+
+### Running PageRank
+> cd CS744-Assignment1
+> CS744-Assignment1/src/main/scala/part3\_pagerank/run.sh -h # Get help text
