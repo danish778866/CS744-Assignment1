@@ -1,6 +1,6 @@
 # CS744 Big Data Systems Assignment 1
 
-## Group members:
+## Group members
 1. Mohan Rao Divate Kodandarama
 2. Mohammed Danish Shaikh
 3. Shreeshrita Patnaik
