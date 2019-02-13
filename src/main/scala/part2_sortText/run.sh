@@ -93,12 +93,15 @@ install_dependencies
 
 SPARK_SUBMIT="${SPARK_DIR}/bin/spark-submit"
 PROJECT_ROOT_DIR=$(dirname $(dirname $(dirname $(dirname $(cd `dirname $0` && pwd)))))
-JAR_FILE="${PROJECT_ROOT_DIR}/target/scala-2.11/pagerank_2.11-1.0.jar"
+JAR_FILE=""
 CLASSPATH="part2_sortText.sortText"
+
 pushd $PROJECT_ROOT_DIR
-if [ ! -f "${JAR_FILE}" ]
+JAR_FILE=`find $(pwd)/ -name *.jar`
+if [ -z "${JAR_FILE}" ]
 then
     sbt package
+    JAR_FILE=`find $(pwd)/ -name *.jar`
 else
     echo "No packaging required..."
 fi
