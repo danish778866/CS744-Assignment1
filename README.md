@@ -44,3 +44,5 @@ The organization of this repository is as follows:
     + `task2_custom_rdd_partitioning`: The folder containing the `PageRankCustomPartition.scala` Scala program for `Task2` and it's corresponding `README.txt`.
     + `task3_caching`: The folder containing the `PageRankCache.scala` Scala program for `Task3` and it's corresponding `README.txt`.
     + `task4_kill_worker`: The folder containing the `PageRankKillWorker.scala` Scala program for `Task4` and it's corresponding `README.txt`.
+* `CS744_Assignment1.pdf`: The report explaining the experiment and our analysis.
+* `CS744_Assignment1_Measurements.pdf`: Fine grained measurements collected and analyzed from our experiments.
