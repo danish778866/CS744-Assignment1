@@ -1,9 +1,9 @@
 # CS744 Big Data Systems Assignment 1
 
 ## Group members
-1. Mohan Rao Divate Kodandarama
-2. Mohammed Danish Shaikh
-3. Shreeshrita Patnaik
+1. [Mohan Rao Divate Kodandarama](https://github.com/divatekodand)
+2. [Mohammed Danish Shaikh](https://github.com/danish778866)
+3. [Shreeshrita Patnaik](https://github.com/Shreeshrita)
 
 ## Building and Running
 ```
