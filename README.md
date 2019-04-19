@@ -29,7 +29,7 @@
       * `Task 1`: Write a Scala/Python/Java Spark application that implements the PageRank algorithm.
       * `Task 2`: Add appropriate custom RDD partitioning and see what changes.
       * `Task 3`: Persist the appropriate RDD as in-memory objects and see what changes.
-      * `Task 4`: Kill a Worker process and see the changes. You should trigger the failure to a desired worker VM when the application reaches 50% of its lifetime:
+      * `Task 4`: Kill a Worker process and see the changes. You should trigger the failure to a desired worker VM when the application reaches 50% of its lifetime.
 
 ## Organization
 The organization of this repository is as follows:
